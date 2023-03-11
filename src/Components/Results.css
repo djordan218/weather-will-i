@@ -54,14 +54,14 @@ border: .5px solid black;}
 
   .forecast-card {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     margin-top: 4px;
     flex-shrink: 0;
     width: 130px;
     height: 180px;
     border-radius: 10px;
-    margin-left: 10px;
+    margin-left: 2px;
     border: .5px solid black;
     margin-bottom: 15px;
   }
@@ -75,7 +75,15 @@ border: .5px solid black;}
 }
 
 .forecast-subtitle {
-    font-size: 12px;
-    margin: -6px;
+    font-size: 13px;
+    margin: -5px;
+    margin-top: 2px;
+    margin-bottom: 6px;
+    line-height: 80%;
 }
-  
+
+.forecast-footer {
+    font-size: 13px;
+    margin: -5px;
+}
+

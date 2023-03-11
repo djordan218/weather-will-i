@@ -109,14 +109,14 @@ function Results(args) {
               <CardBody className="text-center">
                 <CardTitle tag="h5">{hourlyTime(h.time)}</CardTitle>
                 <CardText tag="h6">{h.feelslike_f}&#8457;</CardText>
+                <CardText className="forecast-subtitle">
+                  {h.condition.text}
+                </CardText>
                 {h.chance_of_rain > 0 ? (
-                  <CardSubtitle className="forecast-subtitle">
+                  <CardSubtitle className="forecast-footer">
                     Rain <b>{h.chance_of_rain}%</b>
                   </CardSubtitle>
                 ) : null}
-                <CardSubtitle className="forecast-subtitle">
-                  {h.condition.text}
-                </CardSubtitle>
               </CardBody>
             </Card>
           ))}
