@@ -29,6 +29,7 @@
 .search-input {
     text-align: center;
     font-weight: 100;
+    border: .5px solid black;
 }
 
 .search-input:focus {
@@ -46,10 +47,9 @@
     align-items: center;
     color: black;
     background-color: white;
-    font-weight: 100;
-    border-width: .5px;
     width: 3rem;
     transition-duration: 1000ms;
+    border: .5px solid black;
 }
 
 .search-btn:hover{

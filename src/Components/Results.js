@@ -18,29 +18,22 @@ import 'leaflet/dist/leaflet.css';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import L from 'leaflet';
-import { animated, useSpring } from '@react-spring/web';
 
 function Results(args) {
   const { weather, location, weatherIcon, latitude, longitude, forecast } =
     useContext(WeatherContext);
 
-  const style = useSpring({
-    from: {
-      transform: 'perspective(500px) rotateY(0deg)',
-    },
-    transform: 'perspective(500px) rotateY(25deg)',
-  });
-
   const formatDate = (date) => {
-    const time = new Date(date).toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-    const splitTime = time.split('');
-    if (splitTime[0] === 0) {
-      return splitTime.slice(1).join('');
-    }
-    return time;
+    const time = date.split(' ');
+    const splitTime = time[1].split(':');
+    let hours = splitTime[0];
+    let minutes = splitTime[1];
+    let amPm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    const strTime = hours + ':' + minutes + amPm;
+    return strTime;
   };
 
   const DefaultIcon = L.icon({
@@ -106,21 +99,26 @@ function Results(args) {
       {forecast !== null ? (
         <div className="forecast-container">
           {forecast.map((h) => (
-            <animated.div key={h.id} style={{ style }}>
-              <Card className="forecast-card">
-                <CardImg
-                  className="forecast-card-img"
-                  alt="Card image cap"
-                  src={h.condition.icon}
-                  top
-                />
-                <CardBody className="text-center">
-                  <CardTitle tag="h5">{hourlyTime(h.time)}</CardTitle>
-                  <CardText tag="h6">{h.feelslike_f}&#8457;</CardText>
-                  <CardSubtitle>{h.condition.text}</CardSubtitle>
-                </CardBody>
-              </Card>
-            </animated.div>
+            <Card key={h.time_epoch} className="forecast-card">
+              <CardImg
+                className="forecast-card-img"
+                alt="Card image cap"
+                src={h.condition.icon}
+                top
+              />
+              <CardBody className="text-center">
+                <CardTitle tag="h5">{hourlyTime(h.time)}</CardTitle>
+                <CardText tag="h6">{h.feelslike_f}&#8457;</CardText>
+                {h.chance_of_rain > 0 ? (
+                  <CardSubtitle className="forecast-subtitle">
+                    Rain <b>{h.chance_of_rain}%</b>
+                  </CardSubtitle>
+                ) : null}
+                <CardSubtitle className="forecast-subtitle">
+                  {h.condition.text}
+                </CardSubtitle>
+              </CardBody>
+            </Card>
           ))}
         </div>
       ) : null}

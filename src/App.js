@@ -5,6 +5,7 @@ import Results from './Components/Results';
 import './App.css';
 import WeatherContext from './Hooks/WeatherContext';
 import LoadingSpinner from './Components/LoadingSpinner';
+import logo from './day-and-night.png';
 
 function App() {
   const [weather, setWeather] = useState(null);
@@ -15,7 +16,7 @@ function App() {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [forecast, setForecast] = useState(null);
-  const [navLogo, setNavLogo] = useState(null);
+  const [navLogo, setNavLogo] = useState(logo);
 
   return (
     <WeatherContext.Provider
