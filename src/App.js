@@ -5,7 +5,12 @@ import Results from './Components/Results';
 import './App.css';
 import WeatherContext from './Hooks/WeatherContext';
 import LoadingSpinner from './Components/LoadingSpinner';
+import Questions from './Components/Questions';
 import logo from './day-and-night.png';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 function App() {
   const [weather, setWeather] = useState(null);
@@ -17,6 +22,7 @@ function App() {
   const [longitude, setLongitude] = useState(null);
   const [forecast, setForecast] = useState(null);
   const [navLogo, setNavLogo] = useState(logo);
+  const [theme, setTheme] = useState('light');
 
   return (
     <WeatherContext.Provider
@@ -39,11 +45,14 @@ function App() {
         setForecast,
         navLogo,
         setNavLogo,
+        theme,
+        setTheme,
       }}
     >
       <Navigation />
       <Searchbar />
       {isLoading ? <LoadingSpinner /> : <Results />}
+      {/* <Questions /> */}
     </WeatherContext.Provider>
   );
 }

@@ -1,25 +1,21 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  NavbarText,
-} from 'reactstrap';
+  MDBNavbar,
+  MDBIcon,
+  MDBNavbarBrand,
+  MDBBtn,
+  MDBSwitch,
+} from 'mdb-react-ui-kit';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navigation.css';
-import dayLogo from '../sun.png';
-import nightLogo from '../moon.png';
 import WeatherContext from '../Hooks/WeatherContext';
-import { MdOutlineLocationOn } from 'react-icons/md';
 
 function Navigation(args) {
-  const { location, weatherIcon, navLogo } = useContext(WeatherContext);
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
+  const { navLogo, theme, setTheme } = useContext(WeatherContext);
+  const setUserTheme = () => {
+    theme === 'light' ? setTheme('dark') : setTheme('light');
+    console.log('theme is', theme);
+  };
 
   // useEffect(() => {
   //   const setTime = () => {
@@ -29,39 +25,36 @@ function Navigation(args) {
   // }, []);
 
   return (
-    <div>
-      <Navbar className="ms-auto Navbar">
-        <NavbarBrand className="nav-title" href="/">
+    <MDBNavbar
+      fluid
+      className={
+        theme == 'light' ? 'navbar-light bg-light' : 'navbar-dark bg-dark'
+      }
+      id="navbar"
+    >
+      <div>
+        <MDBNavbarBrand className="nav-title" href="/">
           <img src={navLogo} className="nav-logo" alt="logo" />
           {'  '}weather, will i?
-        </NavbarBrand>
-        {location !== null ? (
-          <NavbarText className="ms-auto">
-            <img
-              src={weatherIcon}
-              className="weather-logo"
-              alt="weatherConditions"
-            />
-            <MdOutlineLocationOn />
-            {location}
-          </NavbarText>
-        ) : null}
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav navbar>
-            <NavItem>
-              <NavLink href="http://danielthedeveloper.com">Portfolio</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="https://github.com/djordan218/">GitHub</NavLink>
-            </NavItem>
-          </Nav>
-          <NavbarText className="nav-footer">
-            Created by Daniel Jordan 2023
-          </NavbarText>
-        </Collapse>
-      </Navbar>
-    </div>
+        </MDBNavbarBrand>
+      </div>
+      <div className="d-flex align-items-center">
+        <MDBBtn
+          className="mx-2"
+          color="tertiary"
+          rippleColor="light"
+          onClick={() => {
+            setUserTheme();
+          }}
+        >
+          {theme === 'light' ? (
+            <MDBIcon fas className="ms-1 light-theme" icon="sun" size="3x" />
+          ) : (
+            <MDBIcon far className="ms-1 dark-theme" icon="moon" size="3x" />
+          )}
+        </MDBBtn>
+      </div>
+    </MDBNavbar>
   );
 }
 

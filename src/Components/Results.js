@@ -2,16 +2,15 @@ import React, { useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Results.css';
 import WeatherContext from '../Hooks/WeatherContext';
+import { ListGroup, ListGroupItem } from 'reactstrap';
 import {
-  Card,
-  CardBody,
-  CardTitle,
-  CardText,
-  ListGroup,
-  ListGroupItem,
-  CardImg,
-  CardSubtitle,
-} from 'reactstrap';
+  MDBCard,
+  MDBCardTitle,
+  MDBCardText,
+  MDBCardBody,
+  MDBCardImage,
+  MDBCardSubTitle,
+} from 'mdb-react-ui-kit';
 import { BiWind } from 'react-icons/bi';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -52,29 +51,30 @@ function Results(args) {
     <div className="container results-div">
       {location !== null ? (
         <div className="container search-results">
-          <div id="map">
-            <MapContainer
-              center={[latitude, longitude]}
-              zoom={10}
-              scrollWheelZoom={false}
-              style={{ width: '100%', height: '30vh' }}
-            >
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              <Marker icon={DefaultIcon} position={[latitude, longitude]}>
-                <Popup>{location}</Popup>
-              </Marker>
-            </MapContainer>
-          </div>
-          <Card className="city-card">
-            <CardBody className="text-center">
-              <CardTitle tag="h5">{location}</CardTitle>
-              <CardText>
+          <MDBCard className="city-card">
+            <MDBCardBody className="text-center">
+              <MDBCardTitle tag="h5">{location}</MDBCardTitle>
+              <MDBCardText>
                 Local Time: {formatDate(weather.location.localtime)}
-              </CardText>
-            </CardBody>
+              </MDBCardText>
+              <div id="map">
+                <MapContainer
+                  className="map"
+                  center={[latitude, longitude]}
+                  zoom={10}
+                  scrollWheelZoom={false}
+                  style={{ width: '100%', height: '30vh' }}
+                >
+                  <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  />
+                  <Marker icon={DefaultIcon} position={[latitude, longitude]}>
+                    <Popup>{location}</Popup>
+                  </Marker>
+                </MapContainer>
+              </div>
+            </MDBCardBody>
             <ListGroup className="list-group" flush>
               <ListGroupItem tag="h6">
                 <img
@@ -93,32 +93,31 @@ function Results(args) {
                 {weather.current.wind_dir}
               </ListGroupItem>
             </ListGroup>
-          </Card>
+          </MDBCard>
         </div>
       ) : null}
       {forecast !== null ? (
         <div className="forecast-container">
           {forecast.map((h) => (
-            <Card key={h.time_epoch} className="forecast-card">
-              <CardImg
+            <MDBCard key={h.time_epoch} className="forecast-card">
+              <MDBCardImage
                 className="forecast-card-img"
                 alt="Card image cap"
                 src={h.condition.icon}
-                top
               />
-              <CardBody className="text-center">
-                <CardTitle tag="h5">{hourlyTime(h.time)}</CardTitle>
-                <CardText tag="h6">{h.feelslike_f}&#8457;</CardText>
-                <CardText className="forecast-subtitle">
+              <MDBCardBody className="text-center">
+                <MDBCardTitle tag="h5">{hourlyTime(h.time)}</MDBCardTitle>
+                <MDBCardText tag="h6">{h.feelslike_f}&#8457;</MDBCardText>
+                <MDBCardText className="forecast-subtitle">
                   {h.condition.text}
-                </CardText>
+                </MDBCardText>
                 {h.chance_of_rain > 0 ? (
-                  <CardSubtitle className="forecast-footer">
+                  <MDBCardSubTitle className="forecast-footer">
                     Rain <b>{h.chance_of_rain}%</b>
-                  </CardSubtitle>
+                  </MDBCardSubTitle>
                 ) : null}
-              </CardBody>
-            </Card>
+              </MDBCardBody>
+            </MDBCard>
           ))}
         </div>
       ) : null}

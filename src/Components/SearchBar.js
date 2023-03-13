@@ -1,13 +1,14 @@
 import React, { useState, useContext } from 'react';
+import { InputGroup, Input, Form, InputGroupText } from 'reactstrap';
 import {
-  InputGroup,
-  Input,
-  Button,
-  Form,
-  ListGroup,
-  ListGroupItem,
-  InputGroupText,
-} from 'reactstrap';
+  MDBListGroup,
+  MDBListGroupItem,
+  MDBInput,
+  MDBInputGroup,
+  MDBBtn,
+} from 'mdb-react-ui-kit';
+import { alpha, styled } from '@mui/material/styles';
+import { TextField } from '@mui/material';
 import dayLogo from '../sun.png';
 import nightLogo from '../moon.png';
 import { MdSearch } from 'react-icons/md';
@@ -24,12 +25,38 @@ function Searchbar() {
     setLongitude,
     setForecast,
     setNavLogo,
+    theme,
   } = useContext(WeatherContext);
   const [query, setQuery] = useState('');
   const [search, setSearch] = useState(null);
+  const [autoFocus, setAutoFocus] = useState(true);
 
   const apiUrl = 'http://api.weatherapi.com/v1';
   const apiKey = '86e73c7d02c041f6b48152838231003';
+
+  const SearchTextField = styled(TextField)({
+    '& label.Mui-focused': {
+      color: '#4476e9',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: '#4476e9',
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'black',
+      },
+      '&:hover fieldset': {
+        borderColor: 'black',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#4476e9',
+      },
+    },
+  });
+
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+  };
 
   // autocomplete when searching
   // calls API as the user search is > 0
@@ -48,7 +75,7 @@ function Searchbar() {
   const sendSearch = async (city) => {
     setIsLoading(true);
     setSearch(null);
-
+    setAutoFocus(false);
     // using timeEpoch to get current time, filters out past results in forecast
     const timeEpoch = Math.round(new Date().getTime() / 1000);
 
@@ -93,33 +120,30 @@ function Searchbar() {
     setQuery('');
     setIsLoading(false);
   };
+
   return (
-    <div className="container search">
+    <div className={theme === 'dark' ? 'search search-div-dark' : 'search'}>
       <div className="search-box">
-        <Form>
-          <InputGroup className="search-bar" size="lg">
-            <InputGroupText className="search-btn">
-              {' '}
-              <MdSearch />
-            </InputGroupText>
-            <Input
-              className="search-input"
-              placeholder="Search here"
-              onChange={(e) => {
-                setQuery(e.target.value);
-              }}
-              onKeyUp={(e) => {
-                autoComplete(e);
-              }}
-              value={query}
-            />
-          </InputGroup>
-        </Form>
+        <SearchTextField
+          key="secret"
+          autoFocus={autoFocus}
+          fullWidth
+          label="What city you searchin' for?"
+          onChange={(e) => {
+            handleChange(e);
+          }}
+          onKeyUp={(e) => {
+            autoComplete(e);
+          }}
+          value={query}
+          className={theme === 'dark' ? 'search-input-dark' : 'search-input'}
+        />
         {search !== null ? (
           <div className="dynamic-search">
-            <ListGroup className="search-list">
+            <MDBListGroup className="search-list" light small>
               {search.map((c) => (
-                <ListGroupItem
+                <MDBListGroupItem
+                  className={theme == 'dark' ? 'list-group-item-dark' : ''}
                   key={c.id}
                   action
                   tag="button"
@@ -127,10 +151,15 @@ function Searchbar() {
                     sendSearch(c);
                   }}
                 >
-                  {c.name}, {c.region}, {c.country}
-                </ListGroupItem>
+                  <div className="city-text-container">
+                    <div className="fw-bold">
+                      {c.name}, {c.region}
+                    </div>
+                    <div className="text-muted ">{c.country}</div>
+                  </div>
+                </MDBListGroupItem>
               ))}
-            </ListGroup>
+            </MDBListGroup>
           </div>
         ) : null}
       </div>

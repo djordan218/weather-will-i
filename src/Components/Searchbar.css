@@ -2,10 +2,20 @@
     font-weight: 100;
 }
 
+.search-div-dark {
+    background-color: #332d2d;
+    animation: fadeInAnimation 1s;
+}
+  @keyframes fadeInAnimation {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+  }
+
 .search {
     display: flex;
     justify-content: center;
     padding: 5px;
+    padding-top: 15px;
 }
 
 .search-box {
@@ -17,25 +27,35 @@
 
 .search-box:focus-within {
     width: 90%;
-    margin-top: 100px;
+    padding-top: 100px;
     transition-duration: 800ms;
   }
 
 .search-box:focus-within .search-btn {
     width: 5em;
-    border: 1px solid #fed402;
+    border: .5px solid black;
     transition-duration: 800ms;
   }
 
-.search-input {
+  .search-box:focus-within .search-btn-dark {
+    width: 5em;
+    transition-duration: 800ms;
+    border: .5px solid black;
+  }
+
+.search-input-dark {
     text-align: center;
     font-weight: 100;
-    border: .5px solid black;
+    border: none;
+    color: white !important;
+    animation: fadeInAnimation 1s;
 }
-
-.search-input:focus {
-    border-color:#fed402  !important;
-    box-shadow: none !important;
+  @keyframes fadeInAnimation {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+  }
+.search-input-dark label{
+    color: white;
 }
 
 .search-icon {
@@ -50,14 +70,29 @@
     background-color: white;
     width: 3rem;
     transition-duration: 1000ms;
-    border: .5px solid black;
+    border: none;
+    animation: lightBtnFadeInAnimation 1s;
 }
+  @keyframes lightBtnFadeInAnimation {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+  }
 
-.search-btn:hover{
+.search-btn-dark{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: black;
-    font-weight: 300;
-    background-color: #fed402
+    width: 3rem;
+    transition-duration: 1000ms;
+    border: none;
+    background-color: #4476e9;
+    animation: btnFadeInAnimation 1s;
 }
+  @keyframes btnFadeInAnimation {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+  }
 
 .dynamic-search {
     position: relative;
@@ -68,4 +103,10 @@
     width: 100%;
     text-align: center;
     z-index: 5;
+    border: .1px solid black;
+}
+
+.city-text-container{
+    padding-top: -8px;
+    padding-bottom: -8px;
 }

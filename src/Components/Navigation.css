@@ -1,5 +1,4 @@
 
-
 .nav-logo {
     height: 5vh;
     pointer-events: none;
@@ -7,28 +6,40 @@
   
   @media (prefers-reduced-motion: no-preference) {
     .nav-logo {
-      animation: App-logo-spin infinite 20s linear;
+      animation: App-logo-spin infinite 50s linear;
     }
   }
 
+.navbar-dark {
+  animation: fadeInAnimation 1s;
+}
+@keyframes fadeInAnimation {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.navbar-light {
+  animation: lightModeFadeInAnimation 1s;
+}
+@keyframes lightModeFadeInAnimation {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+  .dark-theme {
+    margin-right: 20px;
+  }
+
+  .light-theme {
+    margin-right: 20px;
+    color: rgb(255, 204, 0);
+  }
+
   .nav-title {
-    font-weight: 300;
-    font-size: 3vh;
-  }
-
-  .navbar-text{
-    margin-right: 10px;
-  }
-
-  .nav-footer {
-    font-size: 12px;
+    margin-left: 20px;
   }
 
   .weather-logo {
     height: 5vh;
     margin-right: -5px;
-  }
-
-  .navbar-collapse{
-    text-align: end;
   }
