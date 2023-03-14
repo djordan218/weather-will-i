@@ -16,7 +16,7 @@ tags:
 
 # What does this app do?
 
-It's pretty simple, really. A user searches for the weather of a city. The app responds with current weather information, forecast for the next 24 hours, and then some cards a user can flip over with common questions they may ask themselves, including:
+It's pretty simple, really. A user searches for the weather of a city. The app responds with current weather information, forecast for the next 24 hours, and then some cards appear with questions that relate to the returned city's weather results, including:
 
 - Will I need a coat?
 - Will I need to warm up the car?
@@ -26,8 +26,8 @@ It's pretty simple, really. A user searches for the weather of a city. The app r
 
 ## Site
 
-- This is to be determined.
-- Likely host on an S3 bucket through AWS as a static website.
+- http://www.weatherwilli.com
+- Hosted in an S3 bucket on AWS
 
 ## ✨ Features
 
