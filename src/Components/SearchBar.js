@@ -1,17 +1,8 @@
 import React, { useState, useContext } from 'react';
-import { InputGroup, Input, Form, InputGroupText } from 'reactstrap';
-import {
-  MDBListGroup,
-  MDBListGroupItem,
-  MDBInput,
-  MDBInputGroup,
-  MDBBtn,
-} from 'mdb-react-ui-kit';
-import { alpha, styled } from '@mui/material/styles';
+import { MDBListGroup, MDBListGroupItem } from 'mdb-react-ui-kit';
 import { TextField } from '@mui/material';
 import dayLogo from '../sun.png';
 import nightLogo from '../moon.png';
-import { MdSearch } from 'react-icons/md';
 import './Searchbar.css';
 import WeatherContext from '../Hooks/WeatherContext';
 
@@ -26,33 +17,26 @@ function Searchbar() {
     setForecast,
     setNavLogo,
     theme,
+    setSunny,
+    setPartlyCloudy,
+    setOvercast,
+    setRainy,
+    setSnowy,
+    setWindy,
+    setSleet,
+    setIce,
+    setThunder,
+    setTempCold,
+    setTempCool,
+    setTempWarm,
+    setTempHot,
+    setTempFreezing,
   } = useContext(WeatherContext);
   const [query, setQuery] = useState('');
   const [search, setSearch] = useState(null);
-  const [autoFocus, setAutoFocus] = useState(true);
 
   const apiUrl = 'http://api.weatherapi.com/v1';
   const apiKey = '86e73c7d02c041f6b48152838231003';
-
-  const SearchTextField = styled(TextField)({
-    '& label.Mui-focused': {
-      color: '#4476e9',
-    },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: '#4476e9',
-    },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: 'black',
-      },
-      '&:hover fieldset': {
-        borderColor: 'black',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: '#4476e9',
-      },
-    },
-  });
 
   const handleChange = (e) => {
     setQuery(e.target.value);
@@ -75,7 +59,20 @@ function Searchbar() {
   const sendSearch = async (city) => {
     setIsLoading(true);
     setSearch(null);
-    setAutoFocus(false);
+    setSunny(false);
+    setPartlyCloudy(false);
+    setOvercast(false);
+    setRainy(false);
+    setSnowy(false);
+    setWindy(false);
+    setSleet(false);
+    setIce(false);
+    setThunder(false);
+    setTempCold(false);
+    setTempCool(false);
+    setTempWarm(false);
+    setTempHot(false);
+    setTempFreezing(false);
     // using timeEpoch to get current time, filters out past results in forecast
     const timeEpoch = Math.round(new Date().getTime() / 1000);
 
@@ -124,11 +121,73 @@ function Searchbar() {
   return (
     <div className={theme === 'dark' ? 'search search-div-dark' : 'search'}>
       <div className="search-box">
-        <SearchTextField
+        <TextField
+          sx={{
+            '& label.Mui-focused': {
+              color: 'black',
+            },
+            '& .MuiInput-underline:after': {
+              borderBottomColor: 'black',
+              borderWidth: '2px',
+            },
+            '& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                borderColor: 'black',
+                borderWidth: '2px',
+              },
+              '&:hover fieldset': {
+                borderColor: 'black',
+                borderWidth: '2px',
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: 'black',
+                borderWidth: '2px',
+              },
+            },
+            input: {
+              textAlign: 'center',
+              fontSize: '20px',
+              '&::placeholder': {
+                opacity: 0.5,
+              },
+            },
+            ...(theme === 'dark' && {
+              '& label.Mui-focused': {
+                color: '#4476e9',
+                borderWidth: '2px',
+              },
+              '& .MuiInput-underline:after': {
+                borderBottomColor: '#4476e9',
+                borderWidth: '2px',
+              },
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: '#4476e9',
+                  borderWidth: '2px',
+                },
+                '&:hover fieldset': {
+                  borderColor: '#4476e9',
+                  borderWidth: '2px',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#4476e9',
+                  borderWidth: '2px',
+                },
+              },
+              input: {
+                textAlign: 'center',
+                color: 'white',
+                fontSize: '20px',
+                '&::placeholder': {
+                  opacity: 0.5,
+                },
+              },
+            }),
+          }}
           key="secret"
-          autoFocus={autoFocus}
+          autoFocus
           fullWidth
-          label="What city you searchin' for?"
+          placeholder="What city you searchin' for?"
           onChange={(e) => {
             handleChange(e);
           }}
@@ -143,7 +202,7 @@ function Searchbar() {
             <MDBListGroup className="search-list" light small>
               {search.map((c) => (
                 <MDBListGroupItem
-                  className={theme == 'dark' ? 'list-group-item-dark' : ''}
+                  className={theme === 'dark' ? 'list-group-item-dark' : ''}
                   key={c.id}
                   action
                   tag="button"

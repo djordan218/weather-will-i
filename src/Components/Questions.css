@@ -1,5 +1,15 @@
 .card-rows {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
+    align-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    flex-wrap:wrap;
+    gap: 10px;
+}
+
+.card-title {
+    display: flex;
     justify-content: center;
 }

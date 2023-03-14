@@ -1,34 +1,33 @@
-import React, { useContext } from 'react';
-import {
-  MDBNavbar,
-  MDBIcon,
-  MDBNavbarBrand,
-  MDBBtn,
-  MDBSwitch,
-} from 'mdb-react-ui-kit';
+import React, { useContext, useEffect } from 'react';
+import { MDBNavbar, MDBIcon, MDBNavbarBrand, MDBBtn } from 'mdb-react-ui-kit';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navigation.css';
 import WeatherContext from '../Hooks/WeatherContext';
 
 function Navigation(args) {
   const { navLogo, theme, setTheme } = useContext(WeatherContext);
+
   const setUserTheme = () => {
     theme === 'light' ? setTheme('dark') : setTheme('light');
     console.log('theme is', theme);
   };
 
-  // useEffect(() => {
-  //   const setTime = () => {
-  //     const timeOfDay = new Date().toLocaleTimeString();
-  //   };
-  //   setTime();
-  // }, []);
+  useEffect(() => {
+    const changeBodyBg = () => {
+      if (theme === 'dark') {
+        document.body.classList.add('dark');
+      } else if (theme === 'light') {
+        document.body.classList.remove('dark');
+      }
+    };
+    changeBodyBg();
+  }, [theme]);
 
   return (
     <MDBNavbar
-      fluid
+      fluid="true"
       className={
-        theme == 'light' ? 'navbar-light bg-light' : 'navbar-dark bg-dark'
+        theme === 'light' ? 'navbar-light bg-light' : 'navbar-dark bg-dark'
       }
       id="navbar"
     >

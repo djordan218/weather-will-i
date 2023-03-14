@@ -19,8 +19,15 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import L from 'leaflet';
 
 function Results(args) {
-  const { weather, location, weatherIcon, latitude, longitude, forecast } =
-    useContext(WeatherContext);
+  const {
+    weather,
+    location,
+    weatherIcon,
+    latitude,
+    longitude,
+    forecast,
+    theme,
+  } = useContext(WeatherContext);
 
   const formatDate = (date) => {
     const time = date.split(' ');
@@ -48,11 +55,23 @@ function Results(args) {
   };
 
   return (
-    <div className="container results-div">
+    <div
+      className={
+        theme === 'dark'
+          ? 'container-fluid results-div darkTheme'
+          : 'container-fluid results-div'
+      }
+    >
       {location !== null ? (
         <div className="container search-results">
-          <MDBCard className="city-card">
-            <MDBCardBody className="text-center">
+          <MDBCard
+            className={theme === 'dark' ? 'city-card darkTheme' : 'city-card'}
+          >
+            <MDBCardBody
+              className={
+                theme === 'dark' ? 'text-center darkTheme' : 'text-center'
+              }
+            >
               <MDBCardTitle tag="h5">{location}</MDBCardTitle>
               <MDBCardText>
                 Local Time: {formatDate(weather.location.localtime)}
@@ -75,8 +94,16 @@ function Results(args) {
                 </MapContainer>
               </div>
             </MDBCardBody>
-            <ListGroup className="list-group" flush>
-              <ListGroupItem tag="h6">
+            <ListGroup
+              className={
+                theme === 'dark' ? 'list-group darkTheme' : 'list-group'
+              }
+              flush
+            >
+              <ListGroupItem
+                className={theme === 'dark' ? 'darkTheme' : ''}
+                tag="h6"
+              >
                 <img
                   alt="weather-icon"
                   className="weather-icon"
@@ -84,11 +111,17 @@ function Results(args) {
                 />{' '}
                 Current Condition: {weather.current.condition.text}
               </ListGroupItem>
-              <ListGroupItem tag="h6">
+              <ListGroupItem
+                className={theme === 'dark' ? 'darkTheme' : ''}
+                tag="h6"
+              >
                 Feels like: {weather.current.feelslike_f}&#8457; with{' '}
                 {weather.current.humidity}% humidity
               </ListGroupItem>
-              <ListGroupItem tag="h6">
+              <ListGroupItem
+                className={theme === 'dark' ? 'darkTheme' : ''}
+                tag="h6"
+              >
                 <BiWind /> Wind is {weather.current.wind_mph}mph from the{' '}
                 {weather.current.wind_dir}
               </ListGroupItem>
@@ -99,7 +132,14 @@ function Results(args) {
       {forecast !== null ? (
         <div className="forecast-container">
           {forecast.map((h) => (
-            <MDBCard key={h.time_epoch} className="forecast-card">
+            <MDBCard
+              key={h.time_epoch}
+              className={
+                theme === 'dark'
+                  ? 'forecast-card shadow-0 darkTheme'
+                  : 'forecast-card shadow-0'
+              }
+            >
               <MDBCardImage
                 className="forecast-card-img"
                 alt="Card image cap"

@@ -1,3 +1,6 @@
+.dark {
+  background-color: #332d2d;
+}
 
 .nav-logo {
     height: 5vh;
@@ -11,7 +14,7 @@
   }
 
 .navbar-dark {
-  animation: fadeInAnimation 1s;
+  animation: fadeInAnimation 3s;
 }
 @keyframes fadeInAnimation {
     from { opacity: 0; }
@@ -19,7 +22,7 @@
 }
 
 .navbar-light {
-  animation: lightModeFadeInAnimation 1s;
+  animation: lightModeFadeInAnimation 3s;
 }
 @keyframes lightModeFadeInAnimation {
     from { opacity: 0; }

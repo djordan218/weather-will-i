@@ -23,6 +23,29 @@ function App() {
   const [forecast, setForecast] = useState(null);
   const [navLogo, setNavLogo] = useState(logo);
   const [theme, setTheme] = useState('light');
+  const [sunny, setSunny] = useState(false);
+  const [partlyCloudy, setPartlyCloudy] = useState(false);
+  const [overcast, setOvercast] = useState(false);
+  const [rainy, setRainy] = useState(false);
+  const [snowy, setSnowy] = useState(false);
+  const [windy, setWindy] = useState(false);
+  const [sleet, setSleet] = useState(false);
+  const [ice, setIce] = useState(false);
+  const [thunder, setThunder] = useState(false);
+  const [tempCold, setTempCold] = useState(false);
+  const [tempCool, setTempCool] = useState(false);
+  const [tempWarm, setTempWarm] = useState(false);
+  const [tempHot, setTempHot] = useState(false);
+  const [tempFreezing, setTempFreezing] = useState(false);
+
+  function notLoadingScreen() {
+    return (
+      <>
+        <Results />
+        {weather ? <Questions /> : null}
+      </>
+    );
+  }
 
   return (
     <WeatherContext.Provider
@@ -47,12 +70,39 @@ function App() {
         setNavLogo,
         theme,
         setTheme,
+        sunny,
+        setSunny,
+        partlyCloudy,
+        setPartlyCloudy,
+        overcast,
+        setOvercast,
+        rainy,
+        setRainy,
+        snowy,
+        setSnowy,
+        windy,
+        setWindy,
+        sleet,
+        setSleet,
+        ice,
+        setIce,
+        thunder,
+        setThunder,
+        tempCold,
+        setTempCold,
+        tempCool,
+        setTempCool,
+        tempWarm,
+        setTempWarm,
+        tempHot,
+        setTempHot,
+        tempFreezing,
+        setTempFreezing,
       }}
     >
       <Navigation />
       <Searchbar />
-      {isLoading ? <LoadingSpinner /> : <Results />}
-      {/* <Questions /> */}
+      {isLoading ? <LoadingSpinner /> : notLoadingScreen()}
     </WeatherContext.Provider>
   );
 }

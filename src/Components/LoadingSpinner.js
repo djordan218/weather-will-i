@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Oval } from 'react-loader-spinner';
+import WeatherContext from '../Hooks/WeatherContext';
 
 function LoadingSpinner() {
+  const { theme } = useContext(WeatherContext);
   return (
     <div
       style={{
