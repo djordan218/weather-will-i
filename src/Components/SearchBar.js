@@ -56,7 +56,13 @@ function Searchbar() {
       });
   };
 
+  // sets lots of state false
+  // GET request to API on button pressed
+  // weather state set
+  // forecast state set
+  // changes nav logo to either moon/sun
   const sendSearch = async (city) => {
+    // sets all values to false in "will I" question cards
     setIsLoading(true);
     setSearch(null);
     setSunny(false);
@@ -73,6 +79,7 @@ function Searchbar() {
     setTempWarm(false);
     setTempHot(false);
     setTempFreezing(false);
+
     // using timeEpoch to get current time, filters out past results in forecast
     const timeEpoch = Math.round(new Date().getTime() / 1000);
 

@@ -29,6 +29,7 @@ function Results(args) {
     theme,
   } = useContext(WeatherContext);
 
+  // formats the date to be universal and compatible with iOS devices
   const formatDate = (date) => {
     const time = date.split(' ');
     const splitTime = time[1].split(':');
@@ -42,11 +43,13 @@ function Results(args) {
     return strTime;
   };
 
+  // map icon at lat/long
   const DefaultIcon = L.icon({
     iconUrl: icon,
     shadowUrl: iconShadow,
   });
 
+  // this formats the time in the forecast to be "1 PM", etc
   const hourlyTime = (time) => {
     const date = new Date(time).toLocaleTimeString();
     const hour = date.split(':')[0];

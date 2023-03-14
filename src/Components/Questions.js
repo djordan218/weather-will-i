@@ -57,6 +57,9 @@ export default function Questions() {
     setTempFreezing,
   } = useContext(WeatherContext);
 
+  // this checks the values to populate the appropriate cards when search is sent
+  // lots of if/else statements based on API return data
+  // takes the average of the two days of forecast and determines which Temp component to render
   useEffect(() => {
     const maxTemp =
       (weather.forecast.forecastday[0].day.maxtemp_f +

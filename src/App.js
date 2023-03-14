@@ -38,6 +38,7 @@ function App() {
   const [tempHot, setTempHot] = useState(false);
   const [tempFreezing, setTempFreezing] = useState(false);
 
+  // allows the loading spinner to be the only thing on the page when isLoading == true
   function notLoadingScreen() {
     return (
       <>

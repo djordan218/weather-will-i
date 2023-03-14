@@ -7,11 +7,13 @@ import WeatherContext from '../Hooks/WeatherContext';
 function Navigation(args) {
   const { navLogo, theme, setTheme } = useContext(WeatherContext);
 
+  // setting the user theme in state
   const setUserTheme = () => {
     theme === 'light' ? setTheme('dark') : setTheme('light');
     console.log('theme is', theme);
   };
 
+  // changes the body bgImage when theme changes
   useEffect(() => {
     const changeBodyBg = () => {
       if (theme === 'dark') {
