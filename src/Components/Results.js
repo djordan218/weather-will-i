@@ -35,11 +35,12 @@ function Results(args) {
     const splitTime = time[1].split(':');
     let hours = splitTime[0];
     let minutes = splitTime[1];
+    console.log(minutes);
     let amPm = hours >= 12 ? 'pm' : 'am';
     hours = hours % 12;
     hours = hours ? hours : 12;
-    minutes = minutes < 10 ? '0' + minutes : minutes;
     const strTime = hours + ':' + minutes + amPm;
+
     return strTime;
   };
 
